@@ -9,10 +9,17 @@ const wsServer = new WebSocketServer({
 wsServer.on('request', function(request) {
     const connection = request.accept(null, request.origin);
     connection.on('message', function(message) {
-console.log('Received Message:', message.utf8Data);
-connection.sendUTF('Got: '+ message.utf8Data);
+//console.log('Received Message:', message.utf8Data);
+    PythonShell.runString(message.utf8Data, null, function (err, results) {
+//console.log(err);
+//console.log(results);
+    if (err) connection.sendUTF(err.traceback);
+    if (results) connection.sendUTF(results);
+
+});
+//connection.sendUTF('Got: '+ message.utf8Data);
     });
     connection.on('close', function(reasonCode, description) {
 console.log('Client has disconnected.');
-    });
+});
 });
