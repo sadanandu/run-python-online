@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebSocket Playground</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+</head>
+<body>
+<form>
+<div class="form-group">
+<div class="row">
+<div class="col-md-6">
+<button id="run" style="align: left;">Run</button></div>
+<div class="col-md-6"></div>
+</div>
+<div class="row">
+<div class="col-md-6"><textarea class="form-control" id="editor" wrap="off" autocorrect="off" autocapitalize="off" 
+spellcheck="false"></textarea>
+</div>
+<div class="col-md-6"><textarea class="form-control" id="console" wrap="off" autocorrect="off" autocapitalize="off" 
+spellcheck="false"></textarea>
+</div>
+</div>
+</form>
+</body>
+<script>
+const ws = new WebSocket('ws://18.235.255.9:9898/');
+ws.onopen = function() {
+    console.log('WebSocket Client Connected');
+    ws.send('Hi this is web client1');
+};
+
+
+
+ws.onmessage = function(e) {
+  console.log("Received: '" + e.data + "'");
+  var t = document.getElementById("console");
+  t.value = e.data;
+  return true;
+};
+
+
+
+document.getElementById("run").onclick = function (e) { 
+var t = document.getElementById("editor");
+ws.send(t.value);
+return false;
+};
+
+</script>
+</html>
+

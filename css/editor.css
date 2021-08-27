@@ -1,0 +1,4 @@
+.editor {position: absolute;z-index: 0;opacity: 0;background: transparent;-moz-appearance: none;
+appearance: none;border: none;resize: none;outline: none;overflow: hidden;font: inherit;padding: 0 1px;margin: 0 -1px;
+contain: strict;-ms-user-select: text;-moz-user-select: text;-webkit-user-select: text;user-select: text;
+white-space: pre!important;}
